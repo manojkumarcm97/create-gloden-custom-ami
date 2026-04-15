@@ -5,7 +5,7 @@ build{
     
     provisioner "shell" {
         execute_command = "sudo -E bash '{{ .Path }}'"
-        script          = "../scripts/install_ansible.sh"
+        script          = "./scripts/install_ansible.sh"
     }
     provisioner "ansible-local" {
         play_book_dir = "./ansible"
