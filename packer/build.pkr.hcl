@@ -7,7 +7,7 @@ build{
         execute_command = "sudo -E bash '{{ .Path }}'"
         script          = "../scripts/install_ansible.sh"
     }
-    provisioner "nsible-local" {
+    provisioner "ansible-local" {
         play_book_dir = "./ansible"
         playbook_file = "./ansible/playbook.yml"
     }
