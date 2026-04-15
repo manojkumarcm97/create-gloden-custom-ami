@@ -1,0 +1,24 @@
+- name: Install AWS CLI
+  yum:
+    name: awscli
+    state: present
+
+- name: Install CloudWatch Agent
+  yum:
+    name: amazon-cloudwatch-agent
+    state: present
+
+- name: Start CloudWatch Agent
+  command: >
+    /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a start
+
+- name: Install SSM Agent
+  yum:
+    name: amazon-ssm-agent
+    state: present
+
+- name: Enable and start SSM Agent
+  service:
+    name: amazon-ssm-agent
+    state: started
+    enabled: yes

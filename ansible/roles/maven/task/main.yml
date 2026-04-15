@@ -1,0 +1,26 @@
+- name: Install Git
+  yum:
+    name: git
+    state: present
+
+- name: Install Java
+  yum:
+    name: java-11-openjdk-devel
+    state: present
+
+- name: Download Maven
+  get_url:
+    url: https://mirrors.ocf.berkeley.edu/apache/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
+    dest: /tmp/maven.tar.gz
+
+- name: Extract Maven
+  unarchive:
+    src: /tmp/maven.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Create symlink
+  file:
+    src: /opt/apache-maven-3.8.4
+    dest: /opt/maven
+    state: link

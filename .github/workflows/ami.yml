@@ -1,0 +1,42 @@
+name: Packer AMI Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      packer_action:
+        description: 'Select Packer Action'
+        required: true
+        default: 'build'
+        type: choice
+        options:
+          - validate
+          - build
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          region: ap-south-1
+
+      - name: Initialize Packer
+        run: packer init .
+
+      - name: Run Selected Action
+        run: |
+          if [ "${{ github.event.inputs.packer_action }}" = "validate" ]; then
+            packer validate .
+          elif [ "${{ github.event.inputs.packer_action }}" = "build" ]; then
+            packer build .
+          fi
