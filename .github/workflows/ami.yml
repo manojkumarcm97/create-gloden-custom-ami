@@ -72,12 +72,10 @@ jobs:
 
       - name: Deregister AMI and Delete Snapshots
         run: |
-          TARGET_AMI_ID="${{ github.event.inputs.ami_id_to_delete }}"
-          
-          if [ -z "$TARGET_AMI_ID" ]; then
-            echo "Error: No AMI ID provided for deletion."
-            exit 1
-          fi
+          # Pick AMI based on the Project tag
+          TARGET_AMI_ID=$(aws ec2 describe-images \
+          --filters "Name=tag:Project,Values=Infrastructure-Automation" \
+          --query 'sort_by(Images, &CreationDate)[-1].ImageId' --output text)
 
           echo "Picking snapshot ID for $TARGET_AMI_ID..."
           # Fetching all snapshot IDs in case of multiple volumes
