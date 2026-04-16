@@ -1,5 +1,5 @@
 build{
-    sources = ["source.amazon-ebs.linux_ami"]
+    sources = "source.amazon-ebs.linux_ami"
     
     provisioner "shell" {
         execute_command = "sudo -E bash '{{ .Path }}'"
