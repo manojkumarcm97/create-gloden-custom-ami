@@ -1,22 +1,15 @@
 #!/bin/bash
-
-# Exit immediately if a command fails
 set -e
 
-echo "Updating system packages..."
-sudo yum update -y
+echo "Updating system..."
+sudo dnf update -y  # Use dnf for Amazon Linux 2023
 
-echo "Installing Python3 and pip..."
-sudo yum install -y python3 python3-pip
+echo "Installing Python and Pip..."
+sudo dnf install -y python3-pip
 
-echo "Installing Ansible..."
-pip3 install --user ansible
+echo "Installing Ansible globally..."
+# Installing without --user puts it in /usr/local/bin, which is already in PATH
+sudo pip3 install ansible
 
-# Add Ansible to PATH (for ec2-user)
-echo 'export PATH=$PATH:$HOME/.local/bin' >> /home/ec2-user/.bashrc
-source /home/ec2-user/.bashrc
-
-echo "Verifying Ansible installation..."
+echo "Verifying installation..."
 ansible --version
-
-echo "Ansible installation completed successfully!"
