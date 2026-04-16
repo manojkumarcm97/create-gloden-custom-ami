@@ -7,7 +7,5 @@ build{
     }
     provisioner "ansible-local" {
         playbook_file = "../ansible/playbook.yml"
-        # Tell Packer where to find the command it just installed
-        ansible_env_vars = [ "PATH=$PATH:/root/.local/bin" ]
     }
 }
