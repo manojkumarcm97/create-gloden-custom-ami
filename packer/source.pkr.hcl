@@ -3,7 +3,15 @@ source "amazon-ebs" "linux_ami" {
   instance_type = var.instance_type
 
   source_ami    = data.amazon-ami.latest_amzn2.id
+  
 
   ssh_username = "ec2-user"
   ami_name     = local.final_ami_name
+
+  # Enable CloudWatch Detailed Monitoring (1-minute intervals)
+  monitoring = true
+
+  # You must create this IAM Role in AWS first
+  # It needs the policy: CloudWatchAgentServerPolicy
+  iam_instance_profile = "PackerCloudWatchRole"
 }
