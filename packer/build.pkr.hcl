@@ -6,6 +6,6 @@ build{
         script          = "./script/install.sh"
     }
     provisioner "ansible-local" {
-        playbook_file = "./ansible/playbook.yml"
+        playbook_file = "../ansible/playbook.yml"
     }
 }
