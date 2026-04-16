@@ -7,7 +7,4 @@ source "amazon-ebs" "linux_ami" {
 
   ssh_username = "ec2-user"
   ami_name     = local.final_ami_name
-
-  # It needs the policy: CloudWatchAgentServerPolicy
-  iam_instance_profile = "PackerCloudWatchRole"
 }
