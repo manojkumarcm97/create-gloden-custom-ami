@@ -1,6 +1,6 @@
 - name: Install Java
   yum:
-    name: java-11-openjdk-devel
+    name: java-11-amazon-corretto-devel
     state: present
 
 - name: Download Tomcat
