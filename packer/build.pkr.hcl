@@ -10,4 +10,7 @@ build{
         playbook_dir  = "../ansible"
         role_paths    = ["../ansible/roles"]
     }
+    post-processor "manifest" {
+        output = "manifest.json"
+    }
 }
