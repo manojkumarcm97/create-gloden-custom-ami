@@ -4,6 +4,9 @@
 
   roles:
     - common
-    - nginx
+    - niginx
     - tomcat
     - maven
+    - cloudwatch
+
+    
