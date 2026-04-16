@@ -3,15 +3,11 @@
     name: git
     state: present
 
-- name: Install Java
-  yum:
-    name: java-11-openjdk-devel
-    state: present
-
 - name: Download Maven
   get_url:
-    url: https://mirrors.ocf.berkeley.edu/apache/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz
-    dest: /tmp/maven.tar.gz
+    url: "https://archive.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz"
+    dest: "/tmp/maven.tar.gz"
+    mode: '0644'
 
 - name: Extract Maven
   unarchive:
